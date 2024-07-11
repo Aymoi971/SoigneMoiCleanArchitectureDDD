@@ -1,0 +1,56 @@
+symfony new project_symfony --full --version=5.4
+symfony new my_project_directory --version="7.1.*" --webapp
+composer require symfony/console
+composer require webapp
+composer require doctrine
+2- configurer la variable DATABASE_URL dans le fichier .env
+ commentez la config par default on ajoutant un # a coté, en suite en remplacez par :
+                (DATABASE_URL="mysql://root:@127.0.0.1:3306/nom_bdd")
+- Sur le terminal de vscode , lancez la commande suivante «php bin/console doctrine:database:create  » pour créer la bdd sur phpMyAdmin 
+
+symfony console make:user
+SoigneMoi/bin/console make:user
+
+JackHollDrack@DESKTOP-N66Q8HD MINGW64 /f/wamp64/www/phoneecom (main)
+$ SoigneMoi/symfony console make:authuser
+
+ What style of authentication do you want? [Empty authenticator]:
+  [0] Empty authenticator
+  [1] Login form authenticator
+ > 1
+1
+
+ The class name of the authenticator to create (e.g. AppCustomAuthenticator):
+ > AppCustomAuthenticator
+
+ Choose a name for the controller class (e.g. SecurityController) [SecurityCon
+troller]:
+ >
+
+ Do you want to generate a '/logout' URL? (yes/no) [yes]:
+ >
+
+ created: src/Security/AppCustomAuthenticator.php
+ updated: config/packages/security.yaml
+ created: src/Controller/SecurityController.php
+ created: templates/security/login.html.twig
+symfony console make:entity user
+symfony console make:registration-form
+
+symfony server:start
+
+symfony console make:entity Category
+symfony console make:crud Category
+symfony console doctrine:schema:update --force or symfony console d:s:u --force
+symfony console make:crud EntityName
+symfony console make:crud Category
+symfony console make:form FromName ClassName
+
+symfony console make:controller ControllerName
+
+pour faire une realtion entre les tables
+ le nom du champ 
+ le type = manytoon or manytomany
+
+
+composer install --no-dev --no-interaction --no-progress --optimize-autoloader --apcu-autoloader
