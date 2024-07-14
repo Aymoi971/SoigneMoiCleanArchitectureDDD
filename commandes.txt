@@ -10,9 +10,15 @@ composer require doctrine
 
 symfony console make:user
 SoigneMoi/bin/console make:user
+composer require symfony/security-bundle
+
+php bin/console make:migration
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
 
 JackHollDrack@DESKTOP-N66Q8HD MINGW64 /f/wamp64/www/phoneecom (main)
-$ SoigneMoi/symfony console make:authuser
+NOW make:registration-form
+$ SoigneMoi/symfony console make:authuser (deprecated)
 
  What style of authentication do you want? [Empty authenticator]:
   [0] Empty authenticator
