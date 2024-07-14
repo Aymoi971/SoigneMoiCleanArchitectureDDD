@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Rights{% endblock %}
+
+{% block body %}
+    <h1>Create new Rights</h1>
+
+    {{ include('rights/_form.html.twig') }}
+
+    <a href="{{ path('app_rights_index') }}">back to list</a>
+{% endblock %}

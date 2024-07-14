@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Rights{% endblock %}
+
+{% block body %}
+    <h1>Edit Rights</h1>
+
+    {{ include('rights/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_rights_index') }}">back to list</a>
+
+    {{ include('rights/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,61 @@
+docker pull nomdapplication
+docker run nomdapplication
+docker start nomdapplication
+docker logs
+
+pour ouvrir un contenuer et faire un composition aver d'autre contenuer
+docker-composer up -d
+
+utiliser le fichier docker-compose.yml pour dire a docker quels fichers je veux lier
+
+in docker files:
+
+telecharger image
+FROM AppNAme:versionNBXXX as ChosenAlias
+
+creer un dossier dans lequel on va importer notre projet
+WORKDIR /app 
+
+Copier le package.json dans le dossier /app
+COPY package.json .
+
+installer les dependences
+RUN gestionaireDePaquets nomeDeLaCommande
+
+copier le reste du code
+
+COPY . .
+
+Construire l'application final
+
+RUN GDP commandebuild
+
+
+
+Installer un seveur web:
+
+FROM ServeurName:version
+
+(voir la doc sur dockerHUB pour savoir comment installer)
+
+
+
+Dans la console:
+docker build -t nomappli/nomcomposnt:nomdutag
+
+Il faut telecharger la langue de programmationdd
+
+
+Attention pour l'ECF il faut bloquer les routes
+dd
+
+un volume: pour persister et donc sauvegarder des donnees
+
+pour connecter deux container via le docker.yml:
+depens_on ou links
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+ 
+

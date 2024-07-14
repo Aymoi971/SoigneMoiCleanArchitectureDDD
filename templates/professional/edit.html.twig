@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Professional{% endblock %}
+
+{% block body %}
+    <h1>Edit Professional</h1>
+
+    {{ include('professional/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_professional_index') }}">back to list</a>
+
+    {{ include('professional/_delete_form.html.twig') }}
+{% endblock %}
