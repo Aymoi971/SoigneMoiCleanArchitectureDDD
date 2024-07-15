@@ -11,29 +11,36 @@ class ClientCreateProcess {
     public function execute(ClientCreateProcessRequest $request, ClientOutputPort $outputPort) {
         $user = $request->clientUser;
         $response = new ClientCreateProcessResponse();
-        if ($user->isAuthorized('Create_Process_Self')){
-            $persistence = $request->clientPersistenceInterface;
-            if ($persistence->isLoggedIn($user)){
-                $process = $request->clientProcess;
-                if (!$process->getErrors()){
-                    $persistence->addClientProcess($user, $process);
-                    $response->status = "success";
-                    $response->message = "Process_added";
-                    $response->clientProcess = $process;
-                    return $outputPort->present($response);
-                }
-                $response->status = "failure";
-                $response->message = "Incomplete";
-                $response->errors = $process->getErrors();
-                return $outputPort->present($response);
-            }
+
+        if (!$user->isAuthorized('Create_Process_Self')){
+            $response->status = "failure";
+            $response->message = "Not_Authorized";
+            return $outputPort->present($response);
+        }
+        $persistence = $request->clientPersistenceInterface;
+        if (!$persistence->isLoggedIn($user)){
             $response->status = "failure";
             $response->message = "Not_Logged_In";
             return $outputPort->present($response);
         }
-        $response->status = "failure";
-        $response->message = "Not_Authorized";
+        $process = $request->clientProcess;
+        if ($process->getErrors()){
+            $response->status = "failure";
+            $response->message = "Incomplete_Data";
+            $response->errors = $process->getErrors();
+            return $outputPort->present($response);
+        }
+        
+        $persistence->addClientProcess($user, $process);
+        $response->status = "success";
+        $response->message = "Process_added";
+        $response->clientProcess = $process;
         return $outputPort->present($response);
     }
+                
+            
+        
+       
+    
 }
 ?>

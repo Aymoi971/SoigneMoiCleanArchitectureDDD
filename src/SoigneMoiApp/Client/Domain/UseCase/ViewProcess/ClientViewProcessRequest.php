@@ -3,10 +3,11 @@ namespace App\SoigneMoiApp\Client\Domain\UseCase\ViewProcess;
 
 class ClientViewProcessRequest {
     
-    public $ClientPersistenceInterface;
+    public $clientPersistenceInterface;
+    public $email;
     
-    public function __construct($ClientPersistenceInterface){
-        $this->ClientPersistenceInterface = $ClientPersistenceInterface;
+    public function __construct($email,$clientPersistenceInterface){
+        $this->clientPersistenceInterface = $clientPersistenceInterface;
     }
 }
     

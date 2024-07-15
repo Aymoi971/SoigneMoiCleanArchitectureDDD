@@ -9,9 +9,32 @@ class ClientViewProcess {
     
     public function execute(ClientViewProcessRequest $request, ClientOutputPort $outputPort) {
         
-        $ClientViewProcessResponse = new ClientViewProcessResponse();
+        $persistence = $request->clientPersistenceInterface;
+        $clientUser = $persistence->getClientUser($request->email);
+        $response = new ClientViewProcessResponse();
 
-        return $outputPort->present($ClientViewProcessResponse);
+        if (!$clientUser) {
+            $response->status = "failure";
+            $response->message = "User_not_found";
+            return $outputPort->present($response);
+        }
+        if (!$clientUser->isAuthorized('View_Process_Self')){
+            $response->status = "failure";
+            $response->message = "Not_authorized";
+            return $outputPort->present($response);
+        }
+        if (!$persistence->isLoggedIn($clientUser)){
+            $response->status = "failure";
+            $response->message = "Not_Logged_In";
+            return $outputPort->present($response);
+        }
+        
+        $response->status = "success";
+        $response->message = "Processes_Retrieved";
+        $response->processArr = $clientUser->processesArray;
+
+        return $outputPort->present($response);
+
     }
-}
+}   
 ?>

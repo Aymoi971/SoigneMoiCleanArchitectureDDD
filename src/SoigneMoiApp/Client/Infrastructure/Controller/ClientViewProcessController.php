@@ -18,8 +18,8 @@ class ClientViewProcessController extends ClientBaseController {
         $this->ClientViewProcessUseCase = new ClientViewProcess();
     }
 
-    public function handle() {
-        $ClientViewProcessRequest = new ClientViewProcessRequest($this->ClientPersistenceInterface);
+    public function handle($email) {
+        $ClientViewProcessRequest = new ClientViewProcessRequest($email, $this->ClientPersistenceInterface);
         $this->ClientViewProcessUseCase->execute( $ClientViewProcessRequest, $this->ClientViewProcessPresenter);
     }
 }
